@@ -2,7 +2,7 @@
 
 This is a page where you can put in a series of numbers, where the first one will be the number you want to add up to, and the rest will be numbers you want to add up to the first number with.
 
-[Webpage](https://agentwill.github.io/addupwith/)
+[Add Up With](https://agentwill.github.io/AddUpWith/)
 
 
 ## Examples
