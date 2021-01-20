@@ -145,20 +145,33 @@
 			} else {
 				field.innerHTML = "";
 			}
-			for (let i of recursor(nums).sort((a, b) => {
-					return a.reduce((total, num) => {
-						return total + num
-					}) - b.reduce((total, num) => {
-						return total + num
-					})
-				})) {
-				for (let j = 0; j < i.length; j++) {
-					for (let k = 0; k < i[j]; k++) {
-						field.innerHTML += nums[j] + " ";
+			var posVals = recursor(nums);
+			if (posVals.length == 0) {
+				field.innerHTML = "Sorry, no possible combos."
+			} else {
+				for (let i of posVals.sort((a, b) => {
+						return a.reduce((total, num) => {
+							return total + num
+						}) - b.reduce((total, num) => {
+							return total + num
+						})
+					})) {
+					for (let j = 0; j < i.length; j++) {
+						for (let k = 0; k < i[j]; k++) {
+							field.innerHTML += nums[j] + " ";
+						}
 					}
+					field.innerHTML += "<br>";
 				}
-				field.innerHTML += "<br>";
 			}
+			goal.value = "";
+			allBoxes.innerHTML =
+				'<td><input onchange=changeVisible(this) class="addnum visible" type="text" id="num1"></td>' +
+				'<td><input onchange=changeVisible(this) class="addnum visible" type="text" id="num2"></td>' +
+				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num3"></td>' +
+				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num4"></td>' +
+				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num5"></td>' +
+				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num6"></td>';
 		}
 	</script>
 </body>
