@@ -88,7 +88,9 @@
 								allBoxes.children[j].firstElementChild.className = "addnum visible";
 							} else {
 								var newBox = document.createElement("td");
-								newBox.innerHTML = '<input onchange=changeVisible(this) class="addnum visible" type="text" id="num' + (j + 1) + '">';
+								newBox.innerHTML =
+									'<input onchange=changeVisible(this) class="addnum visible" type="text" id="num' + (j +
+									1) + '">';
 								allBoxes.append(newBox);
 							}
 						}
@@ -96,16 +98,10 @@
 				}
 			}
 			stylesheet.deleteRule(1);
-			stylesheet.insertRule(
-				"table {" +
-				"width: clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes.children.length) + "px, 90vw);" +
-				"border-spacing: 0" +
-				"}", 1);
+			stylesheet.insertRule("table {width: clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes.children
+				.length) + "px, 90vw);border-spacing: 0}", 1);
 			stylesheet.deleteRule(2);
-			stylesheet.insertRule(
-				"td {" +
-				"width: calc(100% / " + allBoxes.children.length + ")" +
-				"}", 2);
+			stylesheet.insertRule("td {width: calc(100% / " + allBoxes.children.length + ")}", 2);
 		}
 
 		function recursor(numList, curPos = 0, remain = parseInt(goal.value)) {
@@ -130,6 +126,10 @@
 			return vals;
 		}
 
+		function reduct(total, num) {
+			return total + num;
+		}
+
 		function generate() {
 			var nums = [...allBoxes.children].map(element => parseInt(element.firstElementChild.value)).filter(element => {
 				return !Number.isNaN(element)
@@ -145,7 +145,13 @@
 			} else {
 				field.innerHTML = "";
 			}
-			for (let i of recursor(nums)) {
+			for (let i of recursor(nums).sort((a, b) => {
+					return a.reduce((total, num) => {
+						return total + num
+					}) - b.reduce((total, num) => {
+						return total + num
+					})
+				})) {
 				for (let j = 0; j < i.length; j++) {
 					for (let k = 0; k < i[j]; k++) {
 						field.innerHTML += nums[j] + " ";
