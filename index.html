@@ -10,12 +10,12 @@
 		}
 
 		table {
-			width: clamp(240px, 600px, 90vw);
+			width: clamp(200px, 500px, 90vw);
 			border-spacing: 0
 		}
 
 		td {
-			width: calc(100% / 6)
+			width: calc(100% / 5)
 		}
 
 		#labelbox {
@@ -23,7 +23,7 @@
 		}
 
 		#goalnum {
-			width: calc((100% + 2px) * 2 / 3 - 10px)
+			width: calc(100% - 8px)
 		}
 
 		#genbutton {
@@ -47,9 +47,9 @@
 <body>
 	<table>
 		<tr>
-			<td id="labelbox">Goal:</td>
-			<td colspan="3" id="goalbox"><input type="text" id="goalnum"></td>
-			<td colspan="2"><button id="genbutton" type="button" onclick=generate()>Generate</button></td>
+			<td><button id="genbutton" type="button" onclick=generate()>Generate</button></td>
+			<td colspan="2" id="labelbox">Goal:</td>
+			<td colspan="2" id="goalbox"><input type="text" id="goalnum"></td>
 		</tr>
 		<tr>
 			<td><br></td>
@@ -60,7 +60,6 @@
 			<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num3"></td>
 			<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num4"></td>
 			<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num5"></td>
-			<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num6"></td>
 		</tr>
 	</table><br><br>
 	<div id="allpos"></div>
@@ -76,7 +75,7 @@
 					if (box.value == "") {
 						allBoxes.children[allBoxes.children.length - 1].firstElementChild.value = "";
 						for (let j = allBoxes.children.length - 1; j > i + 1; j--) {
-							if (j < 6) {
+							if (j < 5) {
 								allBoxes.children[j - 1].firstElementChild.value = "";
 								allBoxes.children[j].firstElementChild.className = "addnum hidden";
 							} else {
@@ -127,10 +126,6 @@
 			return vals;
 		}
 
-		function reduct(total, num) {
-			return total + num;
-		}
-
 		function generate() {
 			var nums = [...allBoxes.children].map(element => parseInt(element.firstElementChild.value)).filter(element => {
 				return !Number.isNaN(element)
@@ -171,8 +166,7 @@
 				'<td><input onchange=changeVisible(this) class="addnum visible" type="text" id="num2"></td>' +
 				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num3"></td>' +
 				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num4"></td>' +
-				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num5"></td>' +
-				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num6"></td>';
+				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num5"></td>';
 		}
 	</script>
 </body>
