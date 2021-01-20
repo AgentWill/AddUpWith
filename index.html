@@ -41,11 +41,6 @@
 		.hidden {
 			display: none
 		}
-
-		#allpos {
-			width: auto;
-			border-collapse: collapse
-		}
 	</style>
 </head>
 
@@ -66,7 +61,7 @@
 			<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num4"></td>
 		</tr>
 	</table><br><br>
-	<table id="allpos"></table>
+	<div id="allpos"></div>
 	<script>
 		const stylesheet = document.styleSheets;
 		const goal = document.getElementById("goalnum");
@@ -137,19 +132,18 @@
 				return b - a
 			});
 			if (goal.value == "") {
-				field.innerHTML = '<tr><td class="tablepos">Set a goal.</td></tr>';
+				field.innerHTML = "Set a goal.";
 				return;
 			} else if (nums.length == 0) {
-				field.innerHTML = '<tr"><td class="tablepos">Add numbers to count up with.</td></tr>';
+				field.innerHTML = "Add numbers to count up with."
 				return;
 			} else {
 				field.innerHTML = "";
 			}
-			let posVals = recursor(nums);
+			var posVals = recursor(nums);
 			if (posVals.length == 0) {
-				field.innerHTML = '<tr><td class="tablepos">Sorry, no possible combos.</td></tr>'
+				field.innerHTML = "Sorry, no possible combos."
 			} else {
-				let newHTML = "";
 				for (let i of posVals.sort((a, b) => {
 						return a.reduce((total, num) => {
 							return total + num
@@ -157,21 +151,13 @@
 							return total + num
 						})
 					})) {
-					newHTML += '<tr>'
 					for (let j = 0; j < i.length; j++) {
 						for (let k = 0; k < i[j]; k++) {
-							newHTML += '<td class="tablepos">' + nums[j] + "</td>";
+							field.innerHTML += nums[j] + " ";
 						}
 					}
-					newHTML += "</tr>";
+					field.innerHTML += "<br>";
 				}
-				field.innerHTML = newHTML;
-				stylesheet[1].insertRule(".tablepos {width: calc(100% / " + posVals[posVals.length - 1].reduce((total,
-					num) => {
-						return total + num
-					}) +
-					");padding: 10px 1px 1px;border-width: 1px;border-style: none none solid;border-color: black;text-align: center}",
-					10);
 			}
 			goal.value = "";
 			allBoxes.innerHTML =
@@ -179,11 +165,6 @@
 				'<td><input onchange=changeVisible(this) class="addnum visible" type="text" id="num2"></td>' +
 				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num3"></td>' +
 				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num4"></td>';
-			stylesheet[1].deleteRule(1);
-			stylesheet[1].insertRule("table {width: clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes
-				.children.length) + "px, 90vw);border-spacing: 0}", 1);
-			stylesheet[1].deleteRule(2);
-			stylesheet[1].insertRule("td {width: calc(100% / " + allBoxes.children.length + ")}", 2);
 		}
 	</script>
 </body>
