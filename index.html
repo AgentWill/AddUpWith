@@ -10,12 +10,12 @@
 		}
 
 		table {
-			width: clamp(200px, 500px, 90vw);
+			width: clamp(160px, 400px, 90vw);
 			border-spacing: 0
 		}
 
 		td {
-			width: calc(100% / 5)
+			width: calc(100% / 4)
 		}
 
 		#labelbox {
@@ -48,7 +48,7 @@
 	<table>
 		<tr>
 			<td><button id="genbutton" type="button" onclick=generate()>Generate</button></td>
-			<td colspan="2" id="labelbox">Goal:</td>
+			<td id="labelbox">Goal:</td>
 			<td colspan="2" id="goalbox"><input type="text" id="goalnum"></td>
 		</tr>
 		<tr>
@@ -59,7 +59,6 @@
 			<td><input onchange=changeVisible(this) class="addnum visible" type="text" id="num2"></td>
 			<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num3"></td>
 			<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num4"></td>
-			<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num5"></td>
 		</tr>
 	</table><br><br>
 	<div id="allpos"></div>
@@ -75,7 +74,7 @@
 					if (box.value == "") {
 						allBoxes.children[allBoxes.children.length - 1].firstElementChild.value = "";
 						for (let j = allBoxes.children.length - 1; j > i + 1; j--) {
-							if (j < 5) {
+							if (j < 4) {
 								allBoxes.children[j - 1].firstElementChild.value = "";
 								allBoxes.children[j].firstElementChild.className = "addnum hidden";
 							} else {
@@ -165,8 +164,7 @@
 				'<td><input onchange=changeVisible(this) class="addnum visible" type="text" id="num1"></td>' +
 				'<td><input onchange=changeVisible(this) class="addnum visible" type="text" id="num2"></td>' +
 				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num3"></td>' +
-				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num4"></td>' +
-				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num5"></td>';
+				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num4"></td>';
 		}
 	</script>
 </body>
