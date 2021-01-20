@@ -63,7 +63,7 @@
 	</table><br><br>
 	<div id="allpos"></div>
 	<script>
-		const stylesheet = document.styleSheets[1];
+		const stylesheet = document.styleSheets;
 		const goal = document.getElementById("goalnum");
 		const allBoxes = document.getElementById("addnums");
 		const field = document.getElementById("allpos");
@@ -96,11 +96,11 @@
 					}
 				}
 			}
-			stylesheet.deleteRule(1);
-			stylesheet.insertRule("table {width: clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes.children
-				.length) + "px, 90vw);border-spacing: 0}", 1);
-			stylesheet.deleteRule(2);
-			stylesheet.insertRule("td {width: calc(100% / " + allBoxes.children.length + ")}", 2);
+			stylesheet[1].deleteRule(1);
+			stylesheet[1].insertRule("table {width: clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes
+				.children.length) + "px, 90vw);border-spacing: 0}", 1);
+			stylesheet[1].deleteRule(2);
+			stylesheet[1].insertRule("td {width: calc(100% / " + allBoxes.children.length + ")}", 2);
 		}
 
 		function recursor(numList, curPos = 0, remain = parseInt(goal.value)) {
