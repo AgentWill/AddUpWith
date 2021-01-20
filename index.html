@@ -1,14 +1,160 @@
 <!doctype html>
 <html>
 
-	<head>
-		<title>Add Up With</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	</head>
-	<body id = "background">
-		<div>
-      <label for="goalnum">Goal: </label>
-      <input type="text" id="goalnum" name="goalnum">
-    </div>
-	</body>
+<head>
+	<title>Add Up With</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<style>
+		body {
+			margin: 5%
+		}
+
+		table {
+			width: clamp(240px, 600px, 90vw);
+			border-spacing: 0
+		}
+
+		td {
+			width: calc(100% / 6)
+		}
+
+		#labelbox {
+			text-align: right
+		}
+
+		#goalnum {
+			width: calc((100% + 2px) * 2 / 3 - 10px)
+		}
+
+		#genbutton {
+			width: 100%
+		}
+
+		.addnum {
+			width: calc(100% - 8px)
+		}
+
+		.visible {
+			display: inline-block
+		}
+
+		.hidden {
+			display: none
+		}
+	</style>
+</head>
+
+<body>
+	<table>
+		<tr>
+			<td id="labelbox">Goal:</td>
+			<td colspan="3" id="goalbox"><input type="text" id="goalnum"></td>
+			<td colspan="2"><button id="genbutton" type="button" onclick=generate()>Generate</button></td>
+		</tr>
+		<tr>
+			<td><br></td>
+		</tr>
+		<tr id="addnums">
+			<td><input onchange=changeVisible(this) class="addnum visible" type="text" id="num1"></td>
+			<td><input onchange=changeVisible(this) class="addnum visible" type="text" id="num2"></td>
+			<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num3"></td>
+			<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num4"></td>
+			<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num5"></td>
+			<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num6"></td>
+		</tr>
+	</table><br><br>
+	<div id="allpos"></div>
+	<script>
+		const stylesheet = document.styleSheets[1];
+		const goal = document.getElementById("goalnum");
+		const allBoxes = document.getElementById("addnums");
+		const field = document.getElementById("allpos");
+
+		function changeVisible(box) {
+			for (let i = 0; i < allBoxes.children.length; i++) {
+				if (box.id == allBoxes.children[i].firstElementChild.id) {
+					if (box.value == "") {
+						for (let j = allBoxes.children.length - 1; j > i + 1; j--) {
+							if (j < 6) {
+								allBoxes.children[j].firstElementChild.value = "";
+								allBoxes.children[j].firstElementChild.className = "addnum hidden";
+							} else {
+								allBoxes.removeChild(allBoxes.lastElementChild);
+							}
+						}
+					} else {
+						for (let j = i + 1; j < i + 3; j++) {
+							if (j < allBoxes.children.length) {
+								allBoxes.children[j].firstElementChild.className = "addnum visible";
+							} else {
+								var newBox = document.createElement("td");
+								newBox.innerHTML = '<input onchange=changeVisible(this) class="addnum visible" type="text" id="num' + (j + 1) + '">';
+								allBoxes.append(newBox);
+							}
+						}
+					}
+				}
+			}
+			stylesheet.deleteRule(1);
+			stylesheet.insertRule(
+				"table {" +
+				"width: clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes.children.length) + "px, 90vw);" +
+				"border-spacing: 0" +
+				"}", 1);
+			stylesheet.deleteRule(2);
+			stylesheet.insertRule(
+				"td {" +
+				"width: calc(100% / " + allBoxes.children.length + ")" +
+				"}", 2);
+		}
+
+		function recursor(numList, curPos = 0, remain = parseInt(goal.value)) {
+			var vals = [];
+			if (curPos == numList.length - 1) {
+				if (remain % numList[curPos] == 0) {
+					return [
+						[remain / numList[curPos]]
+					];
+				}
+			} else {
+				for (let i = Math.floor(remain / numList[curPos]); i > -1; i--) {
+					if (remain == i * numList[curPos]) {
+						vals.push([i]);
+					} else if (remain - i * numList[curPos] >= numList[numList.length - 1]) {
+						for (let j of recursor(numList, curPos + 1, remain - i * numList[curPos])) {
+							vals.push([i].concat(j));
+						}
+					}
+				}
+			}
+			return vals;
+		}
+
+		function generate() {
+			var nums = [...allBoxes.children].map(element => parseInt(element.firstElementChild.value)).filter(element => {
+				return !Number.isNaN(element)
+			}).sort((a, b) => {
+				return b - a
+			});
+			if (goal.value == "") {
+				field.innerHTML = "Set a goal.";
+				return;
+			} else if (nums.length == 0) {
+				field.innerHTML = "Add numbers to count up with."
+				return;
+			} else {
+				field.innerHTML = "";
+			}
+			for (let i of recursor(nums)) {
+				for (let j = 0; j < i.length; j++) {
+					for (let k = 0; k < i[j]; k++) {
+						field.innerHTML += nums[j] + " ";
+					}
+				}
+				field.innerHTML += "<br>";
+			}
+		}
+	</script>
+</body>
+
 </html>
