@@ -95,8 +95,15 @@
 					}
 				}
 			}
-			tableStyle.width = "clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes.children.length) + "px, 90vw)";
-			button.offsetWidth < 67 ? button.innerHTML = "Gen" : button.innerHTML = "Generate";
+			tableStyle.width = "clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes.children.length) +
+				"px, 90vw)";
+			if (button.offsetWidth > 66) {
+				button.innerHTML = "Generate";
+			} else if (button.offsetWidth > 48) {
+				button.innerHTML = "Gener";
+			} else {
+				button.innerHTML = "Gen";
+			}
 		}
 
 		function recursor(numList, curPos = 0, remain = parseInt(goal.value)) {
