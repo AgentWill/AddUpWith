@@ -65,7 +65,7 @@
 		const allBoxes = document.getElementById("addnums");
 		const field = document.getElementById("allpos");
 		
-		var button = document.getElementById("genbutton").style;
+		var button = document.getElementById("genbutton");
 
 		function changeVisible(box) {
 			for (let i = 0; i < allBoxes.children.length; i++) {
@@ -96,10 +96,7 @@
 				}
 			}
 			tableStyle.width = "clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes.children.length) + "px, 90vw)";
-			field.innerHTML = "Margin: " + button.margin + "<br>" +
-				"Border: " + button.border + "<br>" +
-				"Padding: " + button.padding + "<br>" +
-				"Width: " + button.width + "<br>";
+			alert(button.offsetWidth);
 		}
 
 		function recursor(numList, curPos = 0, remain = parseInt(goal.value)) {
