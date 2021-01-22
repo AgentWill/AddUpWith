@@ -23,9 +23,11 @@
 			width: calc(100% - 8px)
 		}
 
+		/*
 		#genbutton {
 			width: 100%
 		}
+		*/
 
 		.addnum {
 			width: calc(100% - 8px)
@@ -44,9 +46,10 @@
 <body>
 	<table>
 		<tr>
-			<td><button id="genbutton" type="button" onclick=generate()>Generate</button></td>
+			<td><button id="genbutton1" type="button" onclick=generate()>Generate</button></td>
+			<td><button id="genbutton2" type="button" onclick=generate()>Gen</button></td>
 			<td id="labelbox">Goal:</td>
-			<td colspan="2" id="goalbox"><input type="text" id="goalnum"></td>
+			<td colspan="1" id="goalbox"><input type="text" id="goalnum"></td>
 		</tr>
 		<tr>
 			<td><br></td>
@@ -65,7 +68,8 @@
 		const allBoxes = document.getElementById("addnums");
 		const field = document.getElementById("allpos");
 		
-		var button = document.getElementById("genbutton");
+		var btn1 = document.getElementById("genbutton1");
+		var btn2 = document.getElementById("genbutton2");
 
 		function changeVisible(box) {
 			for (let i = 0; i < allBoxes.children.length; i++) {
@@ -96,7 +100,7 @@
 				}
 			}
 			tableStyle.width = "clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes.children.length) + "px, 90vw)";
-			field.innerHTML = button.offsetWidth;
+			field.innerHTML = btn1.offsetWidth + "<br>" + btn2.offsetWidth;
 		}
 
 		function recursor(numList, curPos = 0, remain = parseInt(goal.value)) {
