@@ -11,11 +11,8 @@
 
 		table {
 			width: clamp(160px, 400px, 90vw);
+			table-layout: fixed;
 			border-spacing: 0
-		}
-
-		td {
-			width: calc(100% / 4)
 		}
 
 		#labelbox {
@@ -63,6 +60,7 @@
 	</table><br><br>
 	<div id="allpos"></div>
 	<script>
+		const tableStyle = document.getElementsByTagName("table")[0].style;
 		const goal = document.getElementById("goalnum");
 		const allBoxes = document.getElementById("addnums");
 		const field = document.getElementById("allpos");
@@ -95,10 +93,8 @@
 					}
 				}
 			}
-			document.getElementsByTagName("table")[0].style.width = "clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes.children.length) + "px, 90vw)";
-			for (let i of allBoxes.children) {
-				i.style.width = "calc(100% / " + allBoxes.children.length + ")";
-			}
+			tableStyle.width = "clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes.children.length) + "px, 90vw)";
+			field.innerHTML = tableStyle.width;
 		}
 
 		function recursor(numList, curPos = 0, remain = parseInt(goal.value)) {
@@ -163,10 +159,7 @@
 				'<td><input onchange=changeVisible(this) class="addnum visible" type="text" id="num2"></td>' +
 				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num3"></td>' +
 				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num4"></td>';
-			document.getElementsByTagName("table")[0].style.width = "clamp(160px, 400px, 90vw)";
-			for (let i of allBoxes.children) {
-				i.style.width = "calc(100% / 4)";
-			}
+			tableStyle.width = "clamp(160px, 400px, 90vw)";
 		}
 	</script>
 </body>
