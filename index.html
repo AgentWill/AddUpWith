@@ -97,13 +97,7 @@
 			}
 			tableStyle.width = "clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes.children.length) +
 				"px, 90vw)";
-			if (button.offsetWidth > 66) {
-				button.innerHTML = "Generate";
-			} else if (button.offsetWidth > 48) {
-				button.innerHTML = "Gener";
-			} else {
-				button.innerHTML = "Gen";
-			}
+			button.offsetWidth < 67 ? button.innerHTML = "Gen" : button.innerHTML = "Generate";
 		}
 
 		function recursor(numList, curPos = 0, remain = parseInt(goal.value)) {
@@ -129,11 +123,11 @@
 		}
 
 		function generate() {
-			var nums = [...allBoxes.children].map(element => parseInt(element.firstElementChild.value)).filter(element => {
+			var nums = [...new Set([...allBoxes.children].map(element => parseInt(element.firstElementChild.value)).filter(element => {
 				return !Number.isNaN(element)
 			}).sort((a, b) => {
 				return b - a
-			});
+			}))];
 			if (goal.value == "") {
 				field.innerHTML = "Set a goal.";
 				return;
