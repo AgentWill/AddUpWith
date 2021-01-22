@@ -31,14 +31,6 @@
 		.addnum {
 			width: calc(100% - 8px)
 		}
-
-		.visible {
-			display: inline-block
-		}
-
-		.hidden {
-			display: none
-		}
 	</style>
 </head>
 
@@ -53,10 +45,8 @@
 			<td><br></td>
 		</tr>
 		<tr id="addnums">
-			<td><input onchange=changeVisible(this) class="addnum visible" type="text" id="num1"></td>
-			<td><input onchange=changeVisible(this) class="addnum visible" type="text" id="num2"></td>
-			<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num3"></td>
-			<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num4"></td>
+			<td><input onchange=changeVisible(this) class="addnum" type="text"></td>
+			<td><input onchange=changeVisible(this) class="addnum" type="text"></td>
 		</tr>
 	</table><br><br>
 	<div id="allpos"></div>
@@ -68,32 +58,19 @@
 		const field = document.getElementById("allpos");
 
 		function changeVisible(box) {
-			for (let i = 0; i < allBoxes.children.length; i++) {
-				if (box.id == allBoxes.children[i].firstElementChild.id) {
-					if (box.value == "") {
-						allBoxes.children[allBoxes.children.length - 1].firstElementChild.value = "";
-						for (let j = allBoxes.children.length - 1; j > i + 1; j--) {
-							if (j < 4) {
-								allBoxes.children[j - 1].firstElementChild.value = "";
-								allBoxes.children[j].firstElementChild.className = "addnum hidden";
-							} else {
-								allBoxes.removeChild(allBoxes.lastElementChild);
-							}
-						}
-					} else {
-						for (let j = i + 1; j < i + 3; j++) {
-							if (j < allBoxes.children.length) {
-								allBoxes.children[j].firstElementChild.className = "addnum visible";
-							} else {
-								var newBox = document.createElement("td");
-								newBox.innerHTML =
-									'<input onchange=changeVisible(this) class="addnum visible" type="text" id="num' + (j +
-									1) + '">';
-								allBoxes.append(newBox);
-							}
-						}
-					}
-				}
+			if (allBoxes.children.length > 2 && box.value == "" && box.id == allBoxes.children[allBoxes.children.length - 3].firstElementChild.id) {
+				allBoxes.removeChild(allBoxes.lastElementChild);
+			} else if (box.value != "" && box.id == allBoxes.children[allBoxes.children.length - 2].firstElementChild.id) {
+				var newBox = document.createElement("td");
+				newBox.innerHTML = '<input onchange=changeVisible(this) class="addnum" type="text">';
+				allBoxes.append(newBox);
+			} else if (box.id == allBoxes.children[allBoxes.children.length - 1].firstElementChild.id) {
+				var newBox1 = document.createElement("td");
+				var newBox2 = document.createElement("td");
+				newBox1.innerHTML = '<input onchange=changeVisible(this) class="addnum" type="text">';
+				newBox2.innerHTML = '<input onchange=changeVisible(this) class="addnum" type="text">';
+				allBoxes.append(newBox1);
+				allBoxes.append(newBox2);
 			}
 			tableStyle.width = "clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes.children.length) +
 				"px, 90vw)";
