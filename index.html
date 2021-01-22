@@ -134,13 +134,14 @@
 			} else if (nums.length == 0) {
 				field.innerHTML = "Add numbers to count up with."
 				return;
-			} else {
-				field.innerHTML = "";
 			}
 			var posVals = recursor(nums);
 			if (posVals.length == 0) {
 				field.innerHTML = "Sorry, no possible combos."
 			} else {
+				field.innerHTML = "Total Number: " + posVals.length + "<br><br>";
+				var last = 0;
+				var current;
 				for (let i of posVals.sort((a, b) => {
 						return a.reduce((total, num) => {
 							return total + num
@@ -148,6 +149,11 @@
 							return total + num
 						})
 					})) {
+					current = i.reduce((total, num) => {return total + num});
+					if (current > last) {
+						field.innerHTML += "<br><u>Length: " + current + ", Number: " + posVals.filter(x => x.reduce((total, num) => {return total + num}) == current).length + "</u>";
+						last = current;
+					}
 					for (let j = 0; j < i.length; j++) {
 						for (let k = 0; k < i[j]; k++) {
 							field.innerHTML += nums[j] + " ";
@@ -156,14 +162,6 @@
 					field.innerHTML += "<br>";
 				}
 			}
-			goal.value = "";
-			allBoxes.innerHTML =
-				'<td><input onchange=changeVisible(this) class="addnum visible" type="text" id="num1"></td>' +
-				'<td><input onchange=changeVisible(this) class="addnum visible" type="text" id="num2"></td>' +
-				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num3"></td>' +
-				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num4"></td>';
-			tableStyle.width = "clamp(160px, 400px, 90vw)";
-			button.innerHTML = "Generate";
 		}
 	</script>
 </body>
