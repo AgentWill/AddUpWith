@@ -64,6 +64,8 @@
 		const goal = document.getElementById("goalnum");
 		const allBoxes = document.getElementById("addnums");
 		const field = document.getElementById("allpos");
+		
+		var button = document.getElementById("genbutton").style;
 
 		function changeVisible(box) {
 			for (let i = 0; i < allBoxes.children.length; i++) {
@@ -94,7 +96,6 @@
 				}
 			}
 			tableStyle.width = "clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes.children.length) + "px, 90vw)";
-			let button = document.getElementById("genbutton").style;
 			field.innerHTML = "Margin: " + button.margin + "<br>" +
 				"Border: " + button.border + "<br>" +
 				"Padding: " + button.padding + "<br>" +
