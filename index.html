@@ -63,7 +63,6 @@
 	</table><br><br>
 	<div id="allpos"></div>
 	<script>
-		const stylesheet = document.styleSheets;
 		const goal = document.getElementById("goalnum");
 		const allBoxes = document.getElementById("addnums");
 		const field = document.getElementById("allpos");
@@ -96,11 +95,10 @@
 					}
 				}
 			}
-			stylesheet[1].deleteRule(1);
-			stylesheet[1].insertRule("table {width: clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes
-				.children.length) + "px, 90vw);border-spacing: 0}", 1);
-			stylesheet[1].deleteRule(2);
-			stylesheet[1].insertRule("td {width: calc(100% / " + allBoxes.children.length + ")}", 2);
+			document.getElementsByTagName("table")[0].style.width = "clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes.children.length) + "px, 90vw)";
+			for (let i of allBoxes.children) {
+				i.style.width = "calc(100% / " + allBoxes.children.length + ")";
+			}
 		}
 
 		function recursor(numList, curPos = 0, remain = parseInt(goal.value)) {
@@ -140,7 +138,7 @@
 			} else {
 				field.innerHTML = "";
 			}
-			let posVals = recursor(nums);
+			var posVals = recursor(nums);
 			if (posVals.length == 0) {
 				field.innerHTML = "Sorry, no possible combos."
 			} else {
@@ -165,11 +163,10 @@
 				'<td><input onchange=changeVisible(this) class="addnum visible" type="text" id="num2"></td>' +
 				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num3"></td>' +
 				'<td><input onchange=changeVisible(this) class="addnum hidden" type="text" id="num4"></td>';
-			stylesheet[1].deleteRule(1);
-			stylesheet[1].insertRule("table {width: clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes
-				.children.length) + "px, 90vw);border-spacing: 0}", 1);
-			stylesheet[1].deleteRule(2);
-			stylesheet[1].insertRule("td {width: calc(100% / " + allBoxes.children.length + ")}", 2);
+			document.getElementsByTagName("table")[0].style.width = "clamp(160px, 400px, 90vw)";
+			for (let i of allBoxes.children) {
+				i.style.width = "calc(100% / 4)";
+			}
 		}
 	</script>
 </body>
