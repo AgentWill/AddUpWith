@@ -123,12 +123,10 @@
 		}
 
 		function generate() {
-			var nums = [...allBoxes.children].map(element => parseInt(element.firstElementChild.value)).filter(element => {
-				return !Number.isNaN(element)
+			var nums = [...allBoxes.children].map(element => parseInt(element.firstElementChild.value)).filter((item, pos, self) => {
+				return !Number.isNaN(item) && self.indexOf(item) == pos
 			}).sort((a, b) => {
 				return b - a
-			}).filter((item, pos, self) => {
-			    	return self.indexOf(item) == pos
 			});
 			if (goal.value == "") {
 				field.innerHTML = "Set a goal.";
