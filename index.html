@@ -139,7 +139,7 @@
 			if (posVals.length == 0) {
 				field.innerHTML = "Sorry, no possible combos."
 			} else {
-				field.innerHTML = "Total Number: " + posVals.length + "<br><br>";
+				field.innerHTML = "Total Number: " + posVals.length + "<br>";
 				var last = 0;
 				var current;
 				for (let i of posVals.sort((a, b) => {
@@ -151,7 +151,7 @@
 					})) {
 					current = i.reduce((total, num) => {return total + num});
 					if (current > last) {
-						field.innerHTML += "<br><u>Length: " + current + ", Number: " + posVals.filter(x => x.reduce((total, num) => {return total + num}) == current).length + "</u>";
+						field.innerHTML += "<br><u>Length: " + current + ", Number: " + posVals.filter(x => x.reduce((total, num) => {return total + num}) == current).length + "</u><br>";
 						last = current;
 					}
 					for (let j = 0; j < i.length; j++) {
