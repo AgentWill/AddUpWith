@@ -96,7 +96,7 @@
 				}
 			}
 			tableStyle.width = "clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes.children.length) + "px, 90vw)";
-			alert(button.offsetWidth);
+			field.innerHTML = button.offsetWidth;
 		}
 
 		function recursor(numList, curPos = 0, remain = parseInt(goal.value)) {
