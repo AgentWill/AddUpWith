@@ -94,6 +94,11 @@
 				}
 			}
 			tableStyle.width = "clamp(" + (40 * allBoxes.children.length) + "px, " + (100 * allBoxes.children.length) + "px, 90vw)";
+			let button = document.getElementById("genbutton").style;
+			field.innerHTML = "Margin: " + button.margin + "<br>" +
+				"Border: " + button.border + "<br>" +
+				"Padding: " + button.padding + "<br>" +
+				"Width: " + button.width + "<br>";
 		}
 
 		function recursor(numList, curPos = 0, remain = parseInt(goal.value)) {
