@@ -58,22 +58,29 @@
 		const field = document.getElementById("allpos");
 
 		function changeVisible(box) {
-			if (allBoxes.children.length > 2 && box.value == "" && box.id == allBoxes.children[allBoxes.children.length - 3].firstElementChild.id) {
-				allBoxes.removeChild(allBoxes.lastElementChild);
-			} else if (box.value != "" && box.id == allBoxes.children[allBoxes.children.length - 2].firstElementChild.id) {
-				var newBox = document.createElement("td");
-				newBox.innerHTML = '<input onchange=changeVisible(this) class="addnum" type="text">';
-				allBoxes.append(newBox);
-			} else if (box.id == allBoxes.children[allBoxes.children.length - 1].firstElementChild.id) {
-				var newBox1 = document.createElement("td");
-				var newBox2 = document.createElement("td");
-				newBox1.innerHTML = '<input onchange=changeVisible(this) class="addnum" type="text">';
-				newBox2.innerHTML = '<input onchange=changeVisible(this) class="addnum" type="text">';
-				allBoxes.append(newBox1);
-				allBoxes.append(newBox2);
+			for (let i = 0; i < allBoxes.children.length; i++) {
+				if (box.id == allBoxes.children[i].firstElementChild.id) {
+					if (box.value == "") {
+						for (let j = allBoxes.children.length - 1; j > i; j--) {
+							if (j == i + 1) {
+								allBoxes.children[j].firstElementChild.value = "";
+							} else {
+								allBoxes.removeChild(allBoxes.lastElementChild);
+							}
+						}
+					} else {
+						for (let j = i + 1; j < i + 3; j++) {
+							if (j > allBoxes.children.length - 1) {
+								var newBox = document.createElement("td");
+								newBox.innerHTML = '<input onchange=changeVisible(this) class="addnum" type="text">';
+								allBoxes.append(newBox);
+							}
+						}
+					}
+				}
 			}
-			tableStyle.width = "clamp(" + (40 * Math.max(allBoxes.children.length, 4)) + "px, " + (100 * Math.max(allBoxes.children.length, 4)) +
-				"px, 90vw)";
+			tableStyle.width = "clamp(" + (40 * Math.max(allBoxes.children.length, 4)) + "px, " + (100 * Math.max(allBoxes
+				.children.length, 4)) + "px, 90vw)";
 			button.offsetWidth < 67 ? button.innerHTML = "Gen" : button.innerHTML = "Generate";
 		}
 
@@ -100,7 +107,8 @@
 		}
 
 		function generate() {
-			var nums = [...allBoxes.children].map(element => parseInt(element.firstElementChild.value)).filter((item, pos, self) => {
+			var nums = [...allBoxes.children].map(element => parseInt(element.firstElementChild.value)).filter((item, pos,
+				self) => {
 				return !Number.isNaN(item) && self.indexOf(item) == pos
 			}).sort((a, b) => {
 				return b - a
@@ -126,9 +134,14 @@
 							return total + num
 						})
 					})) {
-					current = i.reduce((total, num) => {return total + num});
+					current = i.reduce((total, num) => {
+						return total + num
+					});
 					if (current > last) {
-						field.innerHTML += "<br><u>Length: " + current + ", Number: " + posVals.filter(x => x.reduce((total, num) => {return total + num}) == current).length + "</u><br>";
+						field.innerHTML += "<br><u>Length: " + current + ", Number: " + posVals.filter(x => x.reduce((total,
+							num) => {
+							return total + num
+						}) == current).length + "</u><br>";
 						last = current;
 					}
 					for (let j = 0; j < i.length; j++) {
