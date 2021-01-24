@@ -152,6 +152,10 @@
 					field.innerHTML += "<br>";
 				}
 			}
+			tableStyle.width = "clamp(160px, 400px, 90vw)";
+			allBoxes.innerHTML =
+				'<td><input onchange=changeVisible(this) class="addnum" type="text"></td><td><input onchange=changeVisible(this) class="addnum" type="text"></td>';
+			button.innerHTML = "Generate";
 		}
 	</script>
 </body>
