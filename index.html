@@ -59,7 +59,7 @@
 
 		function changeVisible(box) {
 			for (let i = 0; i < allBoxes.children.length; i++) {
-				if (box.id == allBoxes.children[i].firstElementChild.id) {
+				if (box == allBoxes.children[i].firstElementChild) {
 					if (box.value == "") {
 						for (let j = allBoxes.children.length - 1; j > i; j--) {
 							if (j == i + 1) {
