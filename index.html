@@ -40,10 +40,10 @@
 			<td><button id="genbutton" type="button" onclick=generate()>Generate</button></td>
 			<td id="labelbox">Goal:</td>
 			<td><input type="text" id="goalnum"></td>
-      <td id="dupli">
-        <input type="checkbox" id="dupes" name="dupes">
-        <label id="checklabel" for="dupes">Duplicates</label>
-      </td>
+			<td id="dupli">
+				<input type="checkbox" id="dupes" name="dupes">
+				<label id="checklabel" for="dupes">Duplicates</label>
+			</td>
 		</tr>
 		<tr>
 			<td><br></td>
@@ -58,8 +58,8 @@
 		const tableStyle = document.getElementsByTagName("table")[0].style;
 		const button = document.getElementById("genbutton");
 		const goal = document.getElementById("goalnum");
-    const check = document.getElementById("dupes");
-    const checkLabel = document.getElementById("checklabel");
+		const check = document.getElementById("dupes");
+		const checkLabel = document.getElementById("checklabel");
 		const allBoxes = document.getElementById("addnums");
 		const field = document.getElementById("allpos");
 
@@ -85,18 +85,17 @@
 					}
 				}
 			}
-			tableStyle.width = "clamp(" + (40 * Math.max(allBoxes.children.length, 4)) + "px, " + (100 * Math.max(allBoxes
-				.children.length, 4)) + "px, 90vw)";
+			tableStyle.width = "clamp(" + (40 * Math.max(allBoxes.children.length, 4)) + "px, " + (100 * Math.max(allBoxes.children.length, 4)) + "px, 90vw)";
 			button.offsetWidth < 69 ? button.innerHTML = "Gen" : button.innerHTML = "Generate";
-      if (button.offsetWidth < 50) {
-        checkLabel.innerHTML = "D";
-      } else if (button.offsetWidth < 65) {
-        checkLabel.innerHTML = "Dps";
-      } else if (button.offsetWidth < 93) {
-        checkLabel.innerHTML = "Dupes";
-      } else {
-        checkLabel.innerHTML = "Duplicates";
-      }
+			if (button.offsetWidth < 50) {
+				checkLabel.innerHTML = "D";
+			} else if (button.offsetWidth < 65) {
+				checkLabel.innerHTML = "Dps";
+			} else if (button.offsetWidth < 93) {
+				checkLabel.innerHTML = "Dupes";
+			} else {
+				checkLabel.innerHTML = "Duplicates";
+			}
 		}
 
 		function recursor(numList, curPos = 0, remain = parseInt(goal.value)) {
@@ -107,15 +106,15 @@
 						[remain / numList[curPos]]
 					];
 				} else if (!check.checked && remain == numList[curPos]) {
-          return [
-            [1]
-          ];
-        }
+					return [
+						[1]
+					];
+				}
 			} else {
 				for (let i = Math.floor(remain / numList[curPos]); i > -1; i--) {
-          if (i > 1 && !check.checked) {
-            i = 1;
-          }
+					if (i > 1 && !check.checked) {
+						i = 1;
+					}
 					if (remain == i * numList[curPos]) {
 						vals.push([i]);
 					} else if (remain - i * numList[curPos] >= numList[numList.length - 1]) {
@@ -150,12 +149,12 @@
 				var last = 0;
 				var current;
 				for (let i of posVals.sort((a, b) => {
-						return a.reduce((total, num) => {
-							return total + num
-						}) - b.reduce((total, num) => {
-							return total + num
-						})
-					})) {
+					return a.reduce((total, num) => {
+						return total + num
+					}) - b.reduce((total, num) => {
+						return total + num
+					})
+				})) {
 					current = i.reduce((total, num) => {
 						return total + num
 					});
@@ -179,7 +178,7 @@
 			allBoxes.innerHTML =
 				'<td><input onchange=changeVisible(this) class="addnum" type="text"></td><td><input onchange=changeVisible(this) class="addnum" type="text"></td>';
 			button.innerHTML = "Generate";
-      checkLabel.innerHTML = "Duplicates";
+			checkLabel.innerHTML = "Duplicates";
 		}
 	</script>
 </body>
