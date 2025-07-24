@@ -158,13 +158,13 @@
 					current = i.reduce((total, num) => {
 						return total + num
 					});
-					if (current > last) {
+					/*if (current > last) {
 						field.innerHTML += "<br><u>Length: " + current + ", Number: " + posVals.filter(x => x.reduce((total,
 							num) => {
 							return total + num
 						}) == current).length + "</u><br>";
 						last = current;
-					}
+					}*/
 					for (let j = 0; j < i.length; j++) {
 						for (let k = 0; k < i[j]; k++) {
 							field.innerHTML += nums[j] + ", ";
