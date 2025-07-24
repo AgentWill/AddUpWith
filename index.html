@@ -145,10 +145,10 @@
 			if (posVals.length == 0) {
 				field.innerHTML = "Sorry, no possible combos."
 			} else {
-				field.innerHTML = "Total Number: " + posVals.length + "<br>";
+				field.innerHTML = "Total Number: " + posVals.length + "<br><br>";
 				var last = 0;
 				var current;
-				var outputText = "<table>";
+				var outputText = "<table style='width: minimum;'>";
 				for (let i of posVals.sort((a, b) => {
 					return a.reduce((total, num) => {
 						return total + num
