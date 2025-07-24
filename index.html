@@ -148,6 +148,7 @@
 				field.innerHTML = "Total Number: " + posVals.length + "<br>";
 				var last = 0;
 				var current;
+				var outputText = "<table>";
 				for (let i of posVals.sort((a, b) => {
 					return a.reduce((total, num) => {
 						return total + num
@@ -165,13 +166,16 @@
 						}) == current).length + "</u><br>";
 						last = current;
 					}*/
+					outputText += "<tr>";
 					for (let j = 0; j < i.length; j++) {
 						for (let k = 0; k < i[j]; k++) {
-							field.innerHTML += nums[j] + ", ";
+							outputText += "<td>" + nums[j] + "</td>";
 						}
 					}
-					field.innerHTML += "<br>";
+					outputText += "</tr>";
 				}
+				outputText += "</table>";
+				field.innerHTML += outputText;
 			}
 			tableStyle.width = "clamp(160px, 400px, 90vw)";
 			goal.value = "";
