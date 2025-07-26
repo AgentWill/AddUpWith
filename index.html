@@ -167,7 +167,7 @@
 						last = current;
 					}*/
 					outputText += "<tr>";
-					for (let j = 0; j < i.length; j++) {
+					for (let j = i.length - 1; j >= 0; j--) {
 						for (let k = 0; k < i[j]; k++) {
 							outputText += "<td>" + nums[j] + "</td>";
 						}
